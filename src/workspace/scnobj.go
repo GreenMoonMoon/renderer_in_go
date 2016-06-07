@@ -4,8 +4,8 @@ package workspace
 import "geomath"
 
 type Scene struct {
-    Name string
-    Objects []Object
+	Name    string
+	Objects []Object
 }
 
 type Object struct {
@@ -16,5 +16,5 @@ type Object struct {
 }
 
 func (s *Scene) Add(o Object) {
-    s.Objects = append(s.Objects, o)
+	s.Objects = append(s.Objects, o)
 }
