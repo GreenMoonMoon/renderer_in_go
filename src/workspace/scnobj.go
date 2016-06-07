@@ -1,3 +1,4 @@
+//Scene objects
 package workspace
 
 import "geomath"
@@ -9,7 +10,7 @@ type Scene struct {
 
 type Object struct {
 	Name     string
-	Center   geomath.Vector
+	Origin   geomath.Vector
 	Vertices []geomath.Vector
 	triangle []int
 }
