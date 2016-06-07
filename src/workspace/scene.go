@@ -4,7 +4,7 @@ import "geomath"
 
 type Scene struct {
     Name string
-    Elements []interface{}
+    Objects []Object
 }
 
 type Object struct {
@@ -14,6 +14,6 @@ type Object struct {
 	triangle []int
 }
 
-func (s *Scene) Add(i interface{}) {
-    s.Elements = append(s.Elements, i)
+func (s *Scene) Add(o Object) {
+    s.Objects = append(s.Objects, o)
 }

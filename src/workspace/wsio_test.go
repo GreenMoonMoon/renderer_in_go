@@ -1,8 +1,11 @@
 package workspace
 
-import "testing"
+import (
+    "testing"
+    "geomath"
+)
 
-var objA := Object{
+var objA Object = Object{
 	Name:   "objectA",
 	Center: geomath.Vector{0, 0, -3},
 	Vertices: []geomath.Vector{
@@ -24,15 +27,29 @@ func TestEmptyScene(t *testing.T) {
     }
 }
 
-func TestScene1EmptyObj(t *testing.T) {
+func TestScene1AddObj(t *testing.T) {
     s := Scene{Name: "SceneA"}
-    s.Add(Object{})
-    if len(s.Elements) != 1 {
+    s.Add(objA)
+    if len(s.Objects) != 1 {
         t.Fail()
     }
 }
 
-func TestSceneAddObjA(t *testing.T) {
-    s := Scene{Name: "SceneB"}
+func TestSaveSceneObjA(t *testing.T) {
+    s := Scene{Name: "SceneA"}
     s.Add(objA)
+    err := s.SaveAs("../../temp/")
+    if err != nil {
+        t.Error(err)
+    }
+}
+
+func TestLoadSceneObjA(t *testing.T) {
+    s, err := Load("../../temp/SceneA.scn")
+    if err != nil {
+        t.Error(err)
+    }
+    if s.Objects[0].Name != "objectA" {
+        t.Error(s.Objects[0])
+    }
 }
