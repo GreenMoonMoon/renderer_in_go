@@ -12,7 +12,7 @@ type Object struct {
 	Name     string
 	Origin   geomath.Vector
 	Vertices []geomath.Vector
-	triangle []int
+	Triangles []int
 }
 
 func (s *Scene) Add(o Object) {

@@ -26,3 +26,11 @@ func CrossProduct(a, b Vector) Vector {
 		a.X*b.Y - b.X*a.Y,
 	}
 }
+
+func Sum(a, b Vector) Vector {
+	return Vector{
+		a.X + b.X,
+		a.Y + b.Y,
+		a.Z + b.Z,
+	}
+}
