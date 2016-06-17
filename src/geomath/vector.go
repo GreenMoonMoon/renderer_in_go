@@ -2,17 +2,41 @@ package geomath
 
 import "math"
 
+var XAxis, YAxis, ZAxis = Vector{1, 0, 0}, Vector{0, 1, 0}, Vector{0, 0, 1}
+
 type Vector struct {
 	X, Y, Z float64
 }
+type Point Vector
+type Normal Vector
 
-func Length(v Vector) float64 {
-	return math.Sqrt(v.X*v.X + v.Y*v.Y + v.Z*v.Z)
+func (v *Vector) Length() float64 {
+    return math.Sqrt(v.X * v.X + v.Y * v.Y + v.Z * v.Z)
 }
 
-func Normal(v Vector) Vector {
-	l := 1 / Length(v)
-	return Vector{v.X * l, v.Y * l, v.Z * l}
+func (v *Vector) Scale(s float64) {
+    v.X *= s
+    v.Y *= s
+    v.Z *= s
+}
+
+func (v *Vector) Add(vector Vector) {
+    v.X += vector.X
+    v.Y += vector.Y
+    v.Z += vector.Z
+}
+
+func (v *Vector) subtract(vector Vector) {
+    v.X -= vector.X
+    v.Y -= vector.Y
+    v.Z -= vector.Z
+}
+
+func (v *Vector) Normalize() {
+    l := 1 / v.Length()
+    v.X = v.X * l
+    v.Y = v.Y * l
+    v.Z = v.Z * l
 }
 
 func DotProduct(a, b Vector) float64 {
