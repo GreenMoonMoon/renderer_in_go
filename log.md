@@ -16,4 +16,6 @@ I've decided that it would be easier to simply render the vector on screen to se
 I understand how rotations matrices work. The next thing should be quaternion.
 
 # log 17/06/16
-I almost finished the scratchapixel geometry lessons. I've made a small rotation animation to test my knowledge so far.
+I almost finished the scratchapixel geometry lessons. I've made a small rotation animation to test my knowledge so far. I also added the Sperical coordinate functions and stuctures.
+
+# log 18/06/16
