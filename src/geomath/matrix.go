@@ -2,36 +2,38 @@ package geomath
 
 import "math"
 
-var AngRadC float64 = math.Pi / 180
+//Degree to radiant ration. 
+var degradC float64 = math.Pi / 180
+
 var Identity [3][3]float64 = [3][3]float64{
     [3]float64{1, 0, 0},
     [3]float64{0, 1, 0},
     [3]float64{0, 0, 1},
 }
 
-//Return a rotation matrix
+//Return a rotation matrix.
 func RotationMatrix(angle float64, axis Vector) (m [3][3]float64) {
-    a := angle * AngRadC
-    c := math.Cos(a)
-    s := math.Sin(a)
-    //print(math.Cos(angle * (math.Pi / 180)))
+    //Convert the degree angle in radiant.
+    r := angle * degradC
+    //Compute the sine and cosine of radiant r
+    //before setting the rotation matrix.
+    c := math.Cos(r)
+    s := math.Sin(r)
+    //Perform the rotation on specified axis.
     switch axis {
         case XAxis:
-        //print("a")
             m = [3][3]float64{
                 [3]float64{1, 0, 0},
                 [3]float64{0, c, s},
                 [3]float64{0, -s, c},
             }
         case YAxis:
-        //print("b")
             m = [3][3]float64{
                 [3]float64{c, 0, s},
                 [3]float64{0, 1, 0},
                 [3]float64{ -s, 0, c},
             }
         case ZAxis:
-        //print("c")
             m = [3][3]float64{
                 [3]float64{c, s, 0},
                 [3]float64{-s, c, 0},
@@ -78,6 +80,9 @@ func TransformMatrix33(v *Vector, m [3][3]float64) Vector {
     }
 }
 
+//Multiply two matrices.
+//note: Similar to the dot product of two vector.
+//Maybe it should be renamed MatrixDotProduct
 func MultMatrices33(a, b [3][3]float64) (m [3][3]float64) {
     for i := 0; i < 3; i++ {
         for j := 0; j < 3; j++ {
