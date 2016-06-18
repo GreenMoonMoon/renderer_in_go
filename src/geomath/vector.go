@@ -52,6 +52,24 @@ func (v *Vector) Normalize() {
     v.Z = v.Z * l
 }
 
+//Return the theta of the vector in a spherical coordinate system.
+//Note: We assume that the vector is normalized.
+func (v *Vector) SphericalTheta() float64 {
+    //The vector should be normalized. We don't normalize it in this
+    //function because the current function will affect the vector itself.
+    return math.Acos(v.Z)
+}
+
+//Retrurn the phi of vector v in a spherical coordinate system.
+func (v *Vector) SphericalPhi() float64 {
+    p := math.Atan2(v.Y, v.X)
+    if p < 0 {
+        return p + 2 * math.Pi
+    } else {
+        return p
+    }
+}
+
 //Retrun the dot product of two vector.
 func DotProduct(a, b Vector) float64 {
 	return (a.X*b.X + a.Y*b.Y + a.Z*b.Z)
