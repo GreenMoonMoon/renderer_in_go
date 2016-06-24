@@ -4,6 +4,7 @@ import "math"
 
 //Basic variables for axis
 var XAxis, YAxis, ZAxis = Vector{1, 0, 0}, Vector{0, 1, 0}, Vector{0, 0, 1}
+var Zero = Vector{0, 0, 0}
 
 //The structure represente a 3 dimension cartesian coordinate. For simplicity,
 //it is called Vector, a sphercal coordinate, on the other hand, is called 
@@ -19,37 +20,44 @@ type Normal Vector
 
 //return the length of a vector
 func (v *Vector) Length() float64 {
-    return math.Sqrt(v.X * v.X + v.Y * v.Y + v.Z * v.Z)
-}
-
-//Scale a vector by a scalar
-func (v *Vector) Scale(scalar float64) {
-    v.X *= scalar
-    v.Y *= scalar
-    v.Z *= scalar
-}
-
-//Add a vector to vector v.
-func (v *Vector) Add(vector Vector) {
-    v.X += vector.X
-    v.Y += vector.Y
-    v.Z += vector.Z
-}
-
-//Subtract a vector from vector v.
-func (v *Vector) subtract(vector Vector) {
-    v.X -= vector.X
-    v.Y -= vector.Y
-    v.Z -= vector.Z
+    //return math.Sqrt(v.X * v.X + v.Y * v.Y + v.Z * v.Z)
+    return math.Sqrt(Dot(*v, *v))
 }
 
 //Normalize the vector
 //todo: add a function that does not affect the vector and return a new vector.
-func (v *Vector) Normalize() {
+func (v *Vector) Normalized() Vector {
     l := 1 / v.Length()
-    v.X = v.X * l
-    v.Y = v.Y * l
-    v.Z = v.Z * l
+    return Vector{
+        v.X * l,
+        v.Y * l,
+        v.Z * l,
+    }
+}
+
+//Add a vector to vector v.
+func Add(a, b Vector) Vector {
+    return Vector{
+    a.X + b.X,
+    a.Y + b.Y,
+    a.Z + b.Z,
+    }
+}
+
+//Subtract a vector from vector v.
+func subtract(a, b Vector) Vector{
+    return Vector {
+        a.X - b.X,
+        a.Y - b.Y,
+        a.Z - b.Z,
+    }
+}
+
+//Scalar multiplication of a vector.
+func (v *Vector) Scale(scalar float64) {
+    v.X *= scalar
+    v.Y *= scalar
+    v.Z *= scalar
 }
 
 //Return the theta of the vector in a spherical coordinate system.
@@ -71,15 +79,38 @@ func (v *Vector) SphericalPhi() float64 {
 }
 
 //Retrun the dot product of two vector.
-func DotProduct(a, b Vector) float64 {
+func Dot(a, b Vector) float64 {
 	return (a.X*b.X + a.Y*b.Y + a.Z*b.Z)
 }
 
 //Return the cross product of two vector.
-func CrossProduct(a, b Vector) Vector {
+func Cross(a, b Vector) Vector {
 	return Vector{
 		a.Y*b.Z - b.Y*a.Z,
 		a.Z*b.X - b.Z*a.X,
 		a.X*b.Y - b.X*a.Y,
 	}
+}
+
+//Box Product (Scalar triple product) of three vectors
+//The box product is also the determinant of a 3 by 3 matrix composed
+//of vectors. 
+func Box(a, b, c Vector) float64 {
+    return Dot(a, Cross(b, c))
+}
+
+func Equal(a, b Vector) bool {
+    if a.X == b.X && a.Y == b.Y && a.Z == b.Z {
+        return true
+    } else {
+        return false
+    }
+}
+
+func Opposite(a, b Vector) bool {
+    if a.X == -b.X && a.Y == -b.Y && a.Z == -b.Z {
+        return true
+    } else {
+        return false
+    }
 }

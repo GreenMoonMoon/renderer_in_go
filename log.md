@@ -19,3 +19,10 @@ I understand how rotations matrices work. The next thing should be quaternion.
 I almost finished the scratchapixel geometry lessons. I've made a small rotation animation to test my knowledge so far. I also added the Sperical coordinate functions and stuctures.
 
 # log 18/06/16
+I finished the spherical coordinate system. There is still a couple of thing to do for the spherical system, but I'm getting bored so I've switched to something else.
+
+# log 21/06/16
+Revamped the rasterizer. I'm trying to setup a interface for rendering.
+
+# log 23/06/16
+Refactored the geomath package.
