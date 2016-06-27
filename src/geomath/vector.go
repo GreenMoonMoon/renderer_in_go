@@ -9,18 +9,6 @@ var Zero = Vec3{0, 0, 0}
 //Vec3 type represent a 3 component vector in euclidean space.
 type Vec3 [3]float64
 
-//The structure represente a 3 dimension cartesian coordinate. For simplicity,
-//it is called Vector, a sphercal coordinate, on the other hand, is called
-//simply Sphercal.
-/*type Vector struct {
-	X, Y, Z float64
-}*/
-
-//Simple distinction between the same structure to allow a more readable code.
-//todo: change to an interface to allow reusing the same function on structure
-type Point Vector
-type Normal Vector
-
 func (v *Vec3) X() float64 { return v[0] } //X return the x element of Vec3 v.
 func (v *Vec3) Y() float64 { return v[1] } //Y return the y element of Vec3 v.
 func (v *Vec3) Z() float64 { return v[2] } //Z return the z element of Vec3 v.
@@ -31,23 +19,12 @@ func NewVec3(x, y, z float64) Vec3 {
 }
 
 //Length returns the length of Vec3 v.
-func (v *Vec3) Length() float64 {
+func Length(v Vec3) float64 {
 	return math.Sqrt(Dot(*v, *v))
 }
 
-//Normalize the vector
-//todo: add a function that does not affect the vector and return a new vector.
-/*func (v *Vector) Normalized() Vector {
-    l := 1 / v.Length()
-    return Vector{
-        v.X * l,
-        v.Y * l,
-        v.Z * l,
-    }
-}*/
-
 //Unit returns the normalized vector of Vec3 v.
-func (v *Vec3) Unit() Vec3 {
+func Unit(v Vec3) Vec3 {
 	l := 1 / v.Length()
 	return Vec3{
 		v[0] * l,
@@ -74,28 +51,35 @@ func Subtract(a, b Vec3) Vec3 {
 	}
 }
 
-//Scale return a scaled vector Vec3 v by scalar s.
-func (v *Vec3) Scale(s float64) {
-	v[0] *= s
-	v[1] *= s
-	v[2] *= s
+func Rotate(vector Vec3, axis Vec3, angle float64) Vec3 {
+	r := angle * degradC
+	return Add(Scale(vector, math.Sin(r)), Add(Scale(Cross(axis, vector), math.Sin(r)), Scale(Scale(axis, Dot(axis, vector)), (1 - math.Cos(r)))))
 }
 
 //Theta return the theta angle of Vec3 v in a spherical coordinate system.
 //Note: We assume that the vector is normalized.
-func (v *Vec3) Theta() float64 {
+func Theta(v Vec3) float64 {
 	//The vector should be normalized. We don't normalize it in this
 	//function because the current function will affect the vector itself.
 	return math.Acos(v[2])
 }
 
 //Phi retrurn the phi angle of vec3 v in a spherical coordinate system.
-func (v *Vec3) Phi() float64 {
+func Phi(v Vec3) float64 {
 	p := math.Atan2(v[1], v[0])
 	if p < 0 {
 		return p + 2*math.Pi
 	} else {
 		return p
+	}
+}
+
+//Scale return a scaled vector Vec3 v by scalar s.
+func Scale(v Vec3, s float64) Vec3 {
+	return Vec3{
+		v[0] * s,
+		v[1] * s,
+		v[2] * s,
 	}
 }
 

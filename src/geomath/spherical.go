@@ -25,8 +25,8 @@ func NewSpherical(x, y, z float64) Spherical {
 /*Note that the function assume the spherical is normalized. Also if the spherical
 coordinate radius is not normalized, you have to multiply the result of each axis by
 the radius.*/
-func (s *Spherical) ToVector() Vector {
-	return Vector{
+func (s *Spherical) ToVector() Vec3 {
+	return Vec3{
 		math.Cos(s.P) * math.Sin(s.T),
 		math.Sin(s.P) * math.Sin(s.T),
 		math.Cos(s.T),

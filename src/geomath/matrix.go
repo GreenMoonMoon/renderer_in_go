@@ -14,7 +14,7 @@ the size dynamicly.
 
 var degradC float64 = math.Pi / 180
 
-var Identity = Mat44{
+/*var Identity = Mat44{
 	[4]float64{1, 0, 0, 0},
 	[4]float64{0, 1, 0, 0},
 	[4]float64{0, 0, 1, 0},
@@ -63,7 +63,7 @@ func Mult(v *Vec3, m Mat44) Vec3 {
 	  The fourth row is used for various transformation such as projections.
 	  Normaly set to (0, 0, 0, 1), if different we divide all the coordinate
 	  by the result W to set it back at one before returning Point{x, y, z}.*/
-	x := v[0]*m[0][0] + v[1]*m[1][0] + v[2]*m[2][0] + m[3][0]
+	/*x := v[0]*m[0][0] + v[1]*m[1][0] + v[2]*m[2][0] + m[3][0]
 	y := v[0]*m[0][1] + v[1]*m[1][1] + v[2]*m[2][1] + m[3][1]
 	z := v[0]*m[0][2] + v[1]*m[1][2] + v[2]*m[2][2] + m[3][2]
 	w := v[0]*m[0][3] + v[1]*m[1][3] + v[2]*m[2][3] + m[3][3]
@@ -103,7 +103,7 @@ func MultMatrices33(a, b [3][3]float64) (m [3][3]float64) {
 		}
 	}
 	return
-}
+}*/
 
 /*Matrix<T, N> & invert()
 {

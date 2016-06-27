@@ -29,3 +29,9 @@ func TestEqualOppositeVector(t *testing.T) {
 		t.Fail()
 	}
 }
+
+func TestRotateVector(t *testing.T) {
+	v := geomath.NewVec3(1, 0, 0)
+	r := v.Rotate(geomath.YAxis, 90)
+	t.Error(r)
+}
