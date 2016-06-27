@@ -20,9 +20,18 @@ I almost finished the scratchapixel geometry lessons. I've made a small rotation
 
 # log 18/06/16
 I finished the spherical coordinate system. There is still a couple of thing to do for the spherical system, but I'm getting bored so I've switched to something else.
+I refactored the geomath package to include both slices and named type. I will build benchmark test and see what is faster. There is also the question of syntax, I will go in favor of whichever code is more readable and easy to write.
 
 # log 21/06/16
 Revamped the rasterizer. I'm trying to setup a interface for rendering.
 
 # log 23/06/16
 Refactored the geomath package.
+
+# log 24/06/16
+I started learning about the determinant of a square matrix and started learning how to invert a matrix with the guass-jordan elimination process.
+
+# log 25/06/16
+I'm unsure between creating a type for a 4 by 4 Matrix or using slices. I feel like slices would add an overhead to each operation but at the same time I could create dynamic function or method for any sized matrices and vectors.
+
+# log 27/06/16

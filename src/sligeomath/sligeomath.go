@@ -1,4 +1,4 @@
-package geomath
+package sligeomath
 
 /*This package implement functions and structures to manipulate vectors and
 matrices in various coordinate system.
